@@ -1,4 +1,4 @@
-package com.nutrisports.`shared	`
+package com.nutrisports.`shared`
 
 import androidx.compose.ui.graphics.Color
 

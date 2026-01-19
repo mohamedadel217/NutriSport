@@ -1,4 +1,4 @@
-package com.nutrisports.`shared	`
+package com.nutrisports.`shared`
 
 import nutrisport.shared.generated.resources.Res
 import nutrisport.shared.generated.resources.back_arrow
