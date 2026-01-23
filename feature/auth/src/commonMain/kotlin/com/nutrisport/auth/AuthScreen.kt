@@ -25,8 +25,11 @@ import com.nutrisports.`shared`.Alpha
 import com.nutrisports.`shared`.BebasNeueFontFamily
 import com.nutrisports.`shared`.FontSize
 import com.nutrisports.`shared`.Surface
+import com.nutrisports.shared.SurfaceBrand
+import com.nutrisports.shared.SurfaceError
 import com.nutrisports.`shared`.TextPrimary
 import com.nutrisports.`shared`.TextSecondary
+import com.nutrisports.shared.TextWhite
 import rememberMessageBarState
 
 @Composable
@@ -42,7 +45,11 @@ fun AuthScreen() {
                 bottom = padding.calculateBottomPadding()
             ),
             messageBarState = messageBarState,
-            errorMaxLines = 2
+            errorMaxLines = 2,
+            errorContainerColor = SurfaceError,
+            errorContentColor = TextWhite,
+            successContainerColor = SurfaceBrand,
+            successContentColor = TextPrimary
         ) {
             Column(
                 modifier = Modifier.fillMaxSize()
