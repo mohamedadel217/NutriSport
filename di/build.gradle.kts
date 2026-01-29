@@ -1,4 +1,3 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -20,7 +19,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
-            baseName = "auth"
+            baseName = "di"
             isStatic = true
         }
     }
@@ -35,11 +34,12 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
-            implementation(libs.messagebar.kmp)
-            implementation(libs.auth.kmp)
-            implementation(libs.auth.firebase.kmp)
 
-            implementation(project(":shared"))
+            implementation(libs.koin.core)
+
+            implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -48,7 +48,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.mo.auth"
+    namespace = "com.mo.di"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {

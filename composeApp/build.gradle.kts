@@ -31,7 +31,7 @@ kotlin {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.splash.screen)
-
+            implementation(libs.koin.android)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -46,6 +46,7 @@ kotlin {
             implementation(libs.firebase.app)
             implementation(project(":navigation"))
             implementation(project(":shared"))
+            implementation(project(":di"))
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
