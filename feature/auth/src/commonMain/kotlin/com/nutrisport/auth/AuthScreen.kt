@@ -30,10 +30,13 @@ import com.nutrisports.shared.SurfaceError
 import com.nutrisports.`shared`.TextPrimary
 import com.nutrisports.`shared`.TextSecondary
 import com.nutrisports.shared.TextWhite
+import org.koin.compose.viewmodel.koinViewModel
+import org.koin.viewmodel.factory.KoinViewModelFactory
 import rememberMessageBarState
 
 @Composable
 fun AuthScreen() {
+    val viewModel = koinViewModel<AuthViewModel>()
     val messageBarState = rememberMessageBarState()
     var loadingState by remember { mutableStateOf(false) }
 
@@ -80,7 +83,14 @@ fun AuthScreen() {
                     linkAccount = false,
                     onResult = { result ->
                         result.onSuccess { user ->
-                            messageBarState.addSuccess("Authentication successful!")
+                            viewModel.createCustomer(
+                                user = user,
+                                onSuccess = {
+                                    messageBarState.addSuccess("Authentication successful!")
+                                },
+                                onError = { message ->
+                                    messageBarState.addError(message)
+                                })
                             loadingState = false
 
                         }.onFailure { error ->

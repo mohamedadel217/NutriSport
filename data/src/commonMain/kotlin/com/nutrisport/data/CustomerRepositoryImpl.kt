@@ -1,0 +1,39 @@
+package com.nutrisport.data
+
+import com.nutrisport.data.domain.CustomerRepository
+import com.nutrisports.shared.domain.Customer
+import dev.gitlive.firebase.Firebase
+import dev.gitlive.firebase.auth.FirebaseUser
+import dev.gitlive.firebase.firestore.firestore
+
+class CustomerRepositoryImpl : CustomerRepository {
+    override suspend fun createCustomer(
+        user: FirebaseUser?,
+        onSuccess: () -> Unit,
+        onError: (String) -> Unit
+    ) {
+        try {
+            if (user != null) {
+                val customerCollection = Firebase.firestore.collection("customers")
+                val customer = Customer(
+                    id = user.uid,
+                    firstName = user.displayName?.split(" ")?.firstOrNull() ?: "Unknown",
+                    lastName = user.displayName?.split(" ")?.lastOrNull() ?: "Unknown",
+                    email = user.email ?: "Unknown"
+                )
+                val customerExist = customerCollection.document(user.uid).get().exists
+                if (customerExist) {
+                    onSuccess()
+                } else {
+                    customerCollection.document(user.uid).set(customer)
+                    onSuccess()
+                }
+
+            } else {
+                onError("User is not available")
+            }
+        } catch (e: Exception) {
+            onError("Error While Creating a Customer: ${e.message}")
+        }
+    }
+}

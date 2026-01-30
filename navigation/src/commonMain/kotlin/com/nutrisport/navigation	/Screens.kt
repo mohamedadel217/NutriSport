@@ -6,4 +6,7 @@ import kotlinx.serialization.Serializable
 sealed class Screens {
     @Serializable
     data object Auth : Screens()
+
+    @Serializable
+    data object HomeGraph : Screens()
 }
