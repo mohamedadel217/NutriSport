@@ -44,9 +44,11 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(libs.auth.kmp)
             implementation(libs.firebase.app)
+            implementation(libs.koin.compose)
             implementation(project(":navigation"))
             implementation(project(":shared"))
             implementation(project(":di"))
+            implementation(project(":data"))
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
